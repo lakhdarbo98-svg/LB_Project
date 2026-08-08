@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>استوديو المونتاج — إدارة مشاريع الفيديو إديتور</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============ MAIN APP ============ -->
+  <div id="app" class="app">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand">
+          <div class="logo-badge sm">🎬</div>
+          <div>
+            <div class="brand-title">استوديو المونتاج</div>
+            <div class="brand-sub">PROJECT WORKSPACE</div>
+          </div>
+        </div>
+        <div class="search-box">
+          <input type="text" id="search-input" placeholder="ابحث عن مشروع أو عميل..." />
+        </div>
+        <div class="filter-row" id="filter-row">
+          <button class="chip active" data-filter="all">الكل</button>
+          <button class="chip" data-filter="active">نشطة</button>
+          <button class="chip" data-filter="overdue">متأخرة</button>
+          <button class="chip" data-filter="done">منجزة</button>
+        </div>
+      </div>
+
+      <div class="project-list" id="project-list"></div>
+
+      <div class="sidebar-footer">
+        <button id="new-project-btn" class="btn btn-primary btn-block">＋ مشروع جديد</button>
+        <button id="export-btn" class="btn btn-ghost btn-block">⬇ تصدير نسخة احتياطية</button>
+        <label class="btn btn-ghost btn-block" style="text-align:center;cursor:pointer;">
+          ⬆ استيراد نسخة احتياطية
+          <input type="file" id="import-input" accept="application/json" hidden />
+        </label>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main" id="main-content">
+      <div class="empty-state">
+        <div class="empty-icon">🗂️</div>
+        <div>اختر مشروعًا من القائمة أو أنشئ مشروعًا جديدًا</div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ============ NEW PROJECT MODAL ============ -->
+  <div id="modal-overlay" class="modal-overlay" hidden>
+    <div class="modal">
+      <div class="modal-header">
+        <h3>مشروع جديد</h3>
+        <button id="modal-close" class="icon-btn">✕</button>
+      </div>
+      <form id="project-form" class="modal-form">
+        <label class="field">
+          <span>اسم المشروع *</span>
+          <input type="text" id="p-name" required placeholder="مثال: فيديو ترويجي - إطلاق منتج" />
+        </label>
+        <div class="field-row">
+          <label class="field">
+            <span>العميل</span>
+            <input type="text" id="p-client" placeholder="اسم العميل" />
+          </label>
+          <label class="field">
+            <span>نوع المشروع</span>
+            <select id="p-type">
+              <option>يوتيوب</option>
+              <option>إعلان تجاري</option>
+              <option>فيلم قصير</option>
+              <option>زفاف</option>
+              <option>فعالية</option>
+              <option>بودكاست</option>
+              <option>ريلز / سوشيال ميديا</option>
+              <option>كوربوريت</option>
+            </select>
+          </label>
+        </div>
+        <div class="field-row">
+          <label class="field">
+            <span>موعد التسليم</span>
+            <input type="date" id="p-deadline" />
+          </label>
+          <label class="field">
+            <span>الأولوية</span>
+            <select id="p-priority">
+              <option value="urgent">عاجلة</option>
+              <option value="high">مرتفعة</option>
+              <option value="medium" selected>متوسطة</option>
+              <option value="low">منخفضة</option>
+            </select>
+          </label>
+        </div>
+        <label class="field">
+          <span>حجم المواد / موقع التخزين</span>
+          <input type="text" id="p-storage" placeholder="مثال: 250GB — SSD خارجي" />
+        </label>
+        <div class="modal-actions">
+          <button type="button" id="modal-cancel" class="btn btn-ghost">إلغاء</button>
+          <button type="submit" class="btn btn-primary btn-lg">إنشاء المشروع</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" hidden></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
